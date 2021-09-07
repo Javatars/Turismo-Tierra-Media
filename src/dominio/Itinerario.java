@@ -31,7 +31,7 @@ public class Itinerario {
 		return this.sugerenciasAceptadas;
 	}
 	
-	public boolean hayPromocionAceptadaQueIncluyeAtraccion(Atraccion atraccion) {
+	public boolean hayPromocionQueIncluyeAtraccion(Atraccion atraccion) {
 		boolean incluye = false;
 		for(Sugerible unaSugerencia : this.sugerenciasAceptadas) {
 			if(unaSugerencia instanceof Promocion && ((Promocion) unaSugerencia).incluyeAtraccion(atraccion)) {

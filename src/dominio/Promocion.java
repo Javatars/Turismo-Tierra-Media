@@ -57,6 +57,11 @@ public class Promocion implements Sugerible {
 	public TipoAtraccion getTipo() {
 		return this.tipoAtraccion;
 	}
+
+	@Override
+	public boolean esPromocion() {
+		return true;
+	}
 	
 	public boolean incluyeAtraccion(Atraccion atraccion) {
 		boolean incluye = false;
@@ -67,10 +72,5 @@ public class Promocion implements Sugerible {
 			}
 		}
 		return incluye;
-	}
-
-	@Override
-	public boolean esPromocion() {
-		return true;
 	}
 }

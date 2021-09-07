@@ -19,23 +19,24 @@ public class App {
 		usuarios = AdministradorArchivo.leerUsuarios();
 		sugerencias = AdministradorArchivo.leerAtracciones();
 		sugerencias = AdministradorArchivo.leerPromociones();
-
 		for(Usuario unUsuario : usuarios) {
 			sugerencias.sort(new ComparadorDeSugerencias(unUsuario.getTipoAtraccionPreferida()));
-			System.out.println("Soy el usuario " + unUsuario.getNombre());
 			System.out.println("-----------------------");
+			System.out.println("Usuario: " + unUsuario.getNombre());
 			for(Sugerible unaSugerencia : sugerencias) {
 				if(unUsuario.puedeComprar(unaSugerencia) && unaSugerencia.hayCupo()) {
 					if(unaSugerencia.esPromocion()) sugerir(unaSugerencia, unUsuario);
-					else if(!unUsuario.getItinerario().hayPromocionAceptadaQueIncluyeAtraccion((Atraccion)unaSugerencia)) sugerir(unaSugerencia, unUsuario);
+					else if(!unUsuario.getItinerario().hayPromocionQueIncluyeAtraccion((Atraccion)unaSugerencia)) sugerir(unaSugerencia, unUsuario);
 				}			
 			}
+			System.out.println("-----------------------");
 		}
 		System.out.println();
 		System.out.println("Acontinuacion se generan los archivos de salida para cada usuario");
 		for(Usuario unUsuario : usuarios) {
 			AdministradorArchivo.escribirCompraUsuario(unUsuario);
 		}
+		System.out.println("Fin del programa");
 	}
 
 	public static ArrayList<Usuario> getUsuarios() {
@@ -48,7 +49,7 @@ public class App {
 
 	public static void sugerir(Sugerible sugerencia, Usuario unUsuario) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		sugerencia.toString();
+		System.out.println(sugerencia.toString());
 		System.out.println("¿Desea comprarlo?(si/no): ");
 		String decisionUsuario = "";
 		try {

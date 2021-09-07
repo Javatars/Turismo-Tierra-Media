@@ -20,7 +20,6 @@ public class AdministradorArchivo {
 		Scanner sc;
 		ArrayList<Usuario> usuarios = App.getUsuarios();
 		String[] line;
-		
 		try {
 			sc = new Scanner(f);
 			while(sc.hasNextLine()) {
@@ -64,12 +63,12 @@ public class AdministradorArchivo {
 		Scanner sc;
 		ArrayList<Sugerible> sugerencias = App.getSugerencias();
 		String[] line;
-		ArrayList<Atraccion> listAtracciones = new ArrayList<Atraccion>();
 		
 		try {
 			sc = new Scanner(f);
 			while(sc.hasNextLine()) {
 				line = sc.nextLine().split("-");
+				ArrayList<Atraccion> listAtracciones = new ArrayList<Atraccion>();
 				for(int i=0; i < Integer.parseInt(line[4]);i++) {
 					for(Sugerible unaSugerencia : sugerencias) {
 						if(unaSugerencia.getNombre().equals(line[5+i])) {
@@ -95,6 +94,7 @@ public class AdministradorArchivo {
 					sugerencias.add(new PromocionAxB(line[1],TipoAtraccion.valueOf(line[2]),listAtracciones,atraccionGratis));
 				}
 				line = null;
+				listAtracciones = null;
 			}
 			sc.close();
 		} catch (FileNotFoundException e) {
