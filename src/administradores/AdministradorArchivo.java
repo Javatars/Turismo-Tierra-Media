@@ -35,7 +35,7 @@ public class AdministradorArchivo {
 		}
 		return usuarios;
 	}
-	
+
 	public static ArrayList<Sugerible> leerAtracciones() {
 		File f = new File("files/atracciones.in");
 		Scanner sc;
@@ -57,7 +57,7 @@ public class AdministradorArchivo {
 		}
 		return sugerencias;
 	}
-	
+
 	public static ArrayList<Sugerible> leerPromociones(){
 		File f = new File("files/promociones.in");
 		Scanner sc;
@@ -104,7 +104,7 @@ public class AdministradorArchivo {
 		}
 		return sugerencias;
 	}
-	
+
 	public static void escribirCompraUsuario(Usuario usuario) {
 		File f = new File("files/" + usuario.getNombre() + ".out");
 		PrintWriter pw;

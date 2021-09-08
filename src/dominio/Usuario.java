@@ -6,7 +6,9 @@ public class Usuario {
 	private double tiempoDisponible;
 	private TipoAtraccion tipoAtraccionPreferida;
 	private Itinerario itinerario;
-	
+
+	public static String nuevaLinea = System.getProperty("line.separator");
+
 	public Usuario(String nombre, int presupuesto, double tiempoDisponible, TipoAtraccion tipoAtraccionPreferida) {
 		super();
 		this.nombre = nombre;
@@ -15,15 +17,15 @@ public class Usuario {
 		this.tipoAtraccionPreferida = tipoAtraccionPreferida;
 		this.itinerario = new Itinerario();
 	}
-	
+
 	public String getNombre() {
 		return this.nombre;
 	}
-	
+
 	public TipoAtraccion getTipoAtraccionPreferida() {
 		return this.tipoAtraccionPreferida;
 	}
-	
+
 	public boolean puedeComprar(Sugerible sugerencia) {
 		return ((this.presupuesto >= sugerencia.costoTotal()) && (Double.doubleToLongBits(this.tiempoDisponible) >= Double.doubleToLongBits(sugerencia.tiempoTotal())));
 	}
@@ -35,19 +37,14 @@ public class Usuario {
 	public void disminuirTiempoDisponible(double tiempoDisponible) {
 		this.tiempoDisponible -= tiempoDisponible;
 	}
-	
+
 	public Itinerario getItinerario() {
 		return this.itinerario;
 	}
 
 	@Override
 	public String toString() {
-		String compras = "";
-		for(Sugerible unaSugerencia : this.itinerario.getSugerenciasAceptadas()) {
-			compras += "	" + unaSugerencia.getNombre() + "/n";
-		}
-		return "Nombre usuario: " + this.nombre + "/n" + "Tipo atraccion preferida: " + this.tipoAtraccionPreferida + "/n" 
-				+ "Compras realizadas: " + compras + "Total a pagar: " + this.itinerario.costoTotal() + "/n"
-				+ "Tiempo necesario para la salida: " + this.itinerario.horasNecesarias();
+		return "Nombre usuario: " + this.nombre + nuevaLinea + "Tipo atraccion preferida: " + this.tipoAtraccionPreferida + nuevaLinea 
+				+ this.itinerario.resumen();
 	}
 }
