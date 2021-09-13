@@ -10,6 +10,10 @@ public class PromocionAxB extends Promocion {
 		this.atraccionGratis = atraccion;
 	}
 	
+	public Atraccion getAtraccionGratis() {
+		return this.atraccionGratis;
+	}
+	
 	@Override
 	public double tiempoTotal() {
 		return super.tiempoTotal() + this.atraccionGratis.tiempoTotal();

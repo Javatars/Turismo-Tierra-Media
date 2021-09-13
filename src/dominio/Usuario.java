@@ -42,9 +42,11 @@ public class Usuario {
 		return this.itinerario;
 	}
 
-	@Override
-	public String toString() {
-		return "Nombre usuario: " + this.nombre + nuevaLinea + "Tipo atraccion preferida: " + this.tipoAtraccionPreferida + nuevaLinea 
-				+ this.itinerario.resumen();
+	public int getPresupuesto() {
+		return presupuesto;
+	}
+
+	public double getTiempoDisponible() {
+		return tiempoDisponible;
 	}
 }

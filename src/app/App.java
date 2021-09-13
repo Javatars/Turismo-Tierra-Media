@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import administradores.AdministradorArchivo;
-import dominio.Atraccion;
 import dominio.ComparadorDeSugerencias;
 import dominio.Sugerible;
 import dominio.Usuario;
@@ -16,18 +15,25 @@ public class App {
 
 	public static void main(String[] args) {
 		System.out.println("Sistema de Turismo en la Tierra Media");
+
 		usuarios = AdministradorArchivo.leerUsuarios();
 		sugerencias = AdministradorArchivo.leerAtracciones();
 		sugerencias = AdministradorArchivo.leerPromociones();
+
+		ejecutar();
+	}
+
+	public static void ejecutar() {
 		for(Usuario unUsuario : usuarios) {
 			sugerencias.sort(new ComparadorDeSugerencias(unUsuario.getTipoAtraccionPreferida()));
 			System.out.println("-----------------------");
-			System.out.println("Usuario: " + unUsuario.getNombre());
+			System.out.println("Usuario " + unUsuario.getNombre() + " - tiene " + unUsuario.getPresupuesto() + " monedas y " + 
+					unUsuario.getTiempoDisponible() + " horas disponibles.");
 			for(Sugerible unaSugerencia : sugerencias) {
-				if(unUsuario.puedeComprar(unaSugerencia) && unaSugerencia.hayCupo()) {
-					if(unaSugerencia.esPromocion()) sugerir(unaSugerencia, unUsuario);
-					else if(!unUsuario.getItinerario().hayPromocionQueIncluyeAtraccion((Atraccion)unaSugerencia)) sugerir(unaSugerencia, unUsuario);
-				}			
+				if(unUsuario.puedeComprar(unaSugerencia) && unaSugerencia.hayCupo() && !unUsuario.getItinerario().incluyeAtraccion(unaSugerencia)) {
+					System.out.println("Le quedan " + unUsuario.getPresupuesto() + " monedas y " + unUsuario.getTiempoDisponible() + " horas disponibles.");
+					sugerir(unaSugerencia, unUsuario);
+				}		
 			}
 			System.out.println("-----------------------");
 		}
@@ -37,14 +43,6 @@ public class App {
 			AdministradorArchivo.escribirCompraUsuario(unUsuario);
 		}
 		System.out.println("Fin del programa");
-	}
-
-	public static ArrayList<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public static ArrayList<Sugerible> getSugerencias() {
-		return sugerencias;
 	}
 
 	public static void sugerir(Sugerible sugerencia, Usuario unUsuario) {
@@ -63,5 +61,13 @@ public class App {
 			unUsuario.disminuirTiempoDisponible(sugerencia.tiempoTotal());
 			sugerencia.disminuirCupo();
 		}
+	}
+
+	public static ArrayList<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public static ArrayList<Sugerible> getSugerencias() {
+		return sugerencias;
 	}
 }

@@ -16,7 +16,7 @@ public class Promocion implements Sugerible {
 
 	@Override
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class Promocion implements Sugerible {
 	public boolean esPromocion() {
 		return true;
 	}
-	
+
 	public boolean incluyeAtraccion(Atraccion atraccion) {
 		boolean incluye = false;
 		for(Atraccion unaAtraccion : atracciones) {
