@@ -7,8 +7,6 @@ public class Usuario {
 	private TipoAtraccion tipoAtraccionPreferida;
 	private Itinerario itinerario;
 
-	public static String nuevaLinea = System.getProperty("line.separator");
-
 	public Usuario(String nombre, int presupuesto, double tiempoDisponible, TipoAtraccion tipoAtraccionPreferida) {
 		super();
 		this.nombre = nombre;
@@ -34,8 +32,8 @@ public class Usuario {
 		this.presupuesto -= presupuesto;
 	}
 
-	public void disminuirTiempoDisponible(double tiempoDisponible) {
-		this.tiempoDisponible -= tiempoDisponible;
+	public void disminuirTiempoDisponible(double tiempo) {
+		this.tiempoDisponible -= tiempo;
 	}
 
 	public Itinerario getItinerario() {

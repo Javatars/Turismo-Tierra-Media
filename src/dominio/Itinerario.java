@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Itinerario {
 	private ArrayList<Sugerible> sugerenciasAceptadas;
 
+	//Se usa en el metodo resumen() para que devuelva el string con un salto de linea
 	public static String nuevaLinea = System.getProperty("line.separator");
 
 	public Itinerario() {

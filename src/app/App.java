@@ -1,6 +1,7 @@
 package app;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -8,6 +9,10 @@ import administradores.AdministradorArchivo;
 import dominio.ComparadorDeSugerencias;
 import dominio.Sugerible;
 import dominio.Usuario;
+import excepciones.AtraccionExistenteException;
+import excepciones.AtraccionNoExisteException;
+import excepciones.PromocionExistenteException;
+import excepciones.UsuarioExistenteException;
 
 public class App {
 	private static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
@@ -16,11 +21,22 @@ public class App {
 	public static void main(String[] args) {
 		System.out.println("Sistema de Turismo en la Tierra Media");
 
-		usuarios = AdministradorArchivo.leerUsuarios();
-		sugerencias = AdministradorArchivo.leerAtracciones();
-		sugerencias = AdministradorArchivo.leerPromociones();
-
-		ejecutar();
+		try {
+			usuarios = AdministradorArchivo.leerUsuarios();
+			sugerencias = AdministradorArchivo.leerAtracciones();
+			sugerencias = AdministradorArchivo.leerPromociones();
+			ejecutar();
+		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
+		}catch (UsuarioExistenteException e) {
+			System.err.println(e.getMessage());
+		}catch (AtraccionExistenteException e) {
+			System.err.println(e.getMessage());
+		} catch (PromocionExistenteException e) {
+			System.err.println(e.getMessage());
+		} catch (AtraccionNoExisteException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	public static void ejecutar() {

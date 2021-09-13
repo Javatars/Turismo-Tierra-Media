@@ -2,7 +2,7 @@ package dominio;
 
 import java.util.ArrayList;
 
-public class Promocion implements Sugerible {
+public abstract class Promocion implements Sugerible {
 	protected String nombre;
 	protected TipoAtraccion tipoAtraccion;
 	protected ArrayList<Atraccion> atracciones = new ArrayList<Atraccion>();
