@@ -16,24 +16,21 @@ import dominio.Usuario;
 
 public class UsuariosTests {
 
-	String nombre;
-	TipoAtraccion tipo;
 	ArrayList<Atraccion> atracciones;
 	Promocion promo1;
 	Usuario usuario1;
 
 	@Before
 	public void setUp() {
-		nombre = "aventura";
-		tipo = null;
+
 		atracciones = new ArrayList<Atraccion>();
 
-		atracciones.add(new Atraccion("Moria", 10, 2, 6, tipo.AVENTURA));
-		atracciones.add(new Atraccion("Minas Tirith", 5, 2.5, 25, tipo.AVENTURA));
-		atracciones.add(new Atraccion("Rivendel", 14, 4.5, 1, tipo.AVENTURA));
+		atracciones.add(new Atraccion("Moria", 10, 2, 6, TipoAtraccion.AVENTURA));
+		atracciones.add(new Atraccion("Minas Tirith", 5, 2.5, 25, TipoAtraccion.AVENTURA));
+		atracciones.add(new Atraccion("Rivendel", 14, 4.5, 1, TipoAtraccion.AVENTURA));
 
-		promo1 = new PromocionAbsoluta(nombre, tipo.AVENTURA, atracciones, 6);
-		usuario1 = new Usuario("Eowyn", 10, 10, tipo.AVENTURA);
+		promo1 = new PromocionAbsoluta("aventura", TipoAtraccion.AVENTURA, atracciones, 6);
+		usuario1 = new Usuario("Eowyn", 10, 10, TipoAtraccion.AVENTURA);
 	}
 
 	@Test
@@ -57,7 +54,7 @@ public class UsuariosTests {
 	@Test
 	public void puedeComprarTest() {
 
-		Promocion promo2 = new PromocionAbsoluta(nombre, tipo.AVENTURA, atracciones, 6);
+		Promocion promo2 = new PromocionAbsoluta("aventura", TipoAtraccion.AVENTURA, atracciones, 6);
 		assertTrue(usuario1.puedeComprar(promo1));
 		App.sugerir(promo2, usuario1);
 		assertFalse(usuario1.puedeComprar(promo2));

@@ -17,27 +17,24 @@ import dominio.Usuario;
 
 public class PromocionesTests {
 
-	String nombre;
-	TipoAtraccion tipo;
 	ArrayList<Atraccion> atracciones;
 	Promocion promo1;
 
 	@Before
 	public void setUp() {
-		nombre = "aventura";
-		tipo = null;
+
 		atracciones = new ArrayList<Atraccion>();
 
-		atracciones.add(new Atraccion("Moria", 10, 2, 6, tipo.AVENTURA));
-		atracciones.add(new Atraccion("Minas Tirith", 5, 2.5, 25, tipo.AVENTURA));
-		atracciones.add(new Atraccion("Rivendel", 14, 4.5, 1, tipo.AVENTURA));
+		atracciones.add(new Atraccion("Moria", 10, 2, 6, TipoAtraccion.AVENTURA));
+		atracciones.add(new Atraccion("Minas Tirith", 5, 2.5, 25, TipoAtraccion.AVENTURA));
+		atracciones.add(new Atraccion("Rivendel", 14, 4.5, 1, TipoAtraccion.AVENTURA));
 
-		promo1 = new PromocionAbsoluta(nombre, tipo.AVENTURA, atracciones, 6);
+		promo1 = new PromocionAbsoluta("aventura", TipoAtraccion.AVENTURA, atracciones, 6);
 	}
 
 	@Test
 	public void hayCupoTest() {
-		Usuario usuario1 = new Usuario("Eowyn", 10, 8, tipo.AVENTURA);
+		Usuario usuario1 = new Usuario("Eowyn", 10, 8, TipoAtraccion.AVENTURA);
 
 		assertTrue(promo1.hayCupo());
 		App.sugerir(promo1, usuario1);
