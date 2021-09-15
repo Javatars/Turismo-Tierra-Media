@@ -18,6 +18,9 @@ public class App {
 	private static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	private static ArrayList<Sugerible> sugerencias = new ArrayList<Sugerible>();
 
+	// Se usa en el metodo resumen() para que devuelva el string con un salto de linea
+	public static String nuevaLinea = System.getProperty("line.separator");
+
 	public static void main(String[] args) {
 		System.out.println("Sistema de Turismo en la Tierra Media");
 
@@ -46,7 +49,7 @@ public class App {
 			System.out.println("Usuario " + unUsuario.getNombre() + " - tiene " + unUsuario.getPresupuesto() + " monedas y " + 
 					unUsuario.getTiempoDisponible() + " horas disponibles.");
 			for(Sugerible unaSugerencia : sugerencias) {
-				if(unUsuario.puedeComprar(unaSugerencia) && unaSugerencia.hayCupo() && !unUsuario.getItinerario().incluyeAtraccion(unaSugerencia)) {
+				if(unUsuario.puedeComprar(unaSugerencia)) {
 					System.out.println("Le quedan " + unUsuario.getPresupuesto() + " monedas y " + unUsuario.getTiempoDisponible() + " horas disponibles.");
 					sugerir(unaSugerencia, unUsuario);
 				}		
@@ -72,10 +75,7 @@ public class App {
 			e.printStackTrace();
 		}
 		if(decisionUsuario.equals("si")) {
-			unUsuario.getItinerario().agregarSugerencia(sugerencia);
-			unUsuario.disminuirPresupuesto(sugerencia.costoTotal());
-			unUsuario.disminuirTiempoDisponible(sugerencia.tiempoTotal());
-			sugerencia.disminuirCupo();
+			unUsuario.comprar(sugerencia);
 		}
 	}
 

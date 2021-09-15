@@ -2,6 +2,8 @@ package dominio;
 
 import java.util.ArrayList;
 
+import app.App;
+
 public abstract class Promocion implements Sugerible {
 	protected String nombre;
 	protected TipoAtraccion tipoAtraccion;
@@ -12,6 +14,10 @@ public abstract class Promocion implements Sugerible {
 		this.nombre = nombre;
 		this.tipoAtraccion = tipoAtraccion;
 		this.atracciones = atracciones;
+	}
+
+	public ArrayList<Atraccion> getAtracciones(){
+		return this.atracciones;
 	}
 
 	@Override
@@ -63,14 +69,14 @@ public abstract class Promocion implements Sugerible {
 		return true;
 	}
 
-	public boolean incluyeAtraccion(Atraccion atraccion) {
-		boolean incluye = false;
-		for(Atraccion unaAtraccion : atracciones) {
-			if(unaAtraccion.equals(atraccion)) {
-				incluye = true;
-				break;
-			}
-		}
-		return incluye;
+	@Override
+	public String resumen() {
+		String resumen = "";
+		resumen += "	" + this.nombre + "[" + App.nuevaLinea;
+		for (int j = 0; j < this.atracciones.size(); j++)
+			resumen += "	" + this.atracciones.get(j).resumen() + App.nuevaLinea;
+		resumen += "	]: el pack cuesta " + this.costoTotal() + " monedas y tiene un tiempo de " 
+				+ this.tiempoTotal() + " horas." + App.nuevaLinea;
+		return resumen;
 	}
 }

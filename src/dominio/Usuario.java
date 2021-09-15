@@ -25,7 +25,8 @@ public class Usuario {
 	}
 
 	public boolean puedeComprar(Sugerible sugerencia) {
-		return ((this.presupuesto >= sugerencia.costoTotal()) && (Double.doubleToLongBits(this.tiempoDisponible) >= Double.doubleToLongBits(sugerencia.tiempoTotal())));
+		return this.presupuesto >= sugerencia.costoTotal() && Double.doubleToLongBits(this.tiempoDisponible) >= Double.doubleToLongBits(sugerencia.tiempoTotal())
+				&& sugerencia.hayCupo() && !this.itinerario.incluyeAtraccion(sugerencia);
 	}
 
 	public void disminuirPresupuesto(int presupuesto) {
@@ -46,5 +47,12 @@ public class Usuario {
 
 	public double getTiempoDisponible() {
 		return tiempoDisponible;
+	}
+
+	public void comprar(Sugerible sugerencia) {
+		this.getItinerario().agregarSugerencia(sugerencia);
+		this.disminuirPresupuesto(sugerencia.costoTotal());
+		this.disminuirTiempoDisponible(sugerencia.tiempoTotal());
+		sugerencia.disminuirCupo();
 	}
 }

@@ -2,15 +2,17 @@ package dominio;
 
 import java.util.ArrayList;
 
+import app.App;
+
 public class Itinerario {
 	private ArrayList<Sugerible> sugerenciasAceptadas;	
 
-	// Se usa en el metodo resumen() para que devuelva el string con un salto de
-	// linea
-	public static String nuevaLinea = System.getProperty("line.separator");
-
 	public Itinerario() {
 		this.sugerenciasAceptadas = new ArrayList<Sugerible>();
+	}
+
+	public ArrayList<Sugerible> getSugerenciasAceptadas(){
+		return this.sugerenciasAceptadas;
 	}
 
 	public double horasNecesarias() {
@@ -30,32 +32,32 @@ public class Itinerario {
 	public void agregarSugerencia(Sugerible sugerencia) {
 		this.sugerenciasAceptadas.add(sugerencia);
 	}
+	
+	public ArrayList<Promocion> getPromociones(){
+		ArrayList<Promocion> promociones = new ArrayList<Promocion>();
+		for(Sugerible unaSugerenciaAceptada : this.sugerenciasAceptadas) {
+			if(unaSugerenciaAceptada.esPromocion()) promociones.add((Promocion)unaSugerenciaAceptada);
+		}
+		return promociones;
+	}
 
 	public boolean incluyeAtraccion(Sugerible sugerencia) {
 		boolean incluye = false;
 		if (!sugerencia.esPromocion()) {
-			for (Sugerible unaSugerenciaAceptada : this.sugerenciasAceptadas) {
-				if (unaSugerenciaAceptada instanceof Promocion
-						&& ((Promocion) unaSugerenciaAceptada).incluyeAtraccion((Atraccion) sugerencia)) {
+			for (Promocion unaPromocionAceptada : this.getPromociones()) {
+				if(unaPromocionAceptada.getAtracciones().contains((Atraccion) sugerencia)) {
 					incluye = true;
 					break;
 				}
 			}
 		} else {
-			ArrayList<Atraccion> listAtracciones = new ArrayList<Atraccion>();
-			for (Atraccion atraccion : ((Promocion) sugerencia).atracciones) {
-				listAtracciones.add(atraccion);
-			}
-			if (sugerencia instanceof PromocionAxB)
-				listAtracciones.add(((PromocionAxB) sugerencia).getAtraccionGratis());
-			for (Atraccion unaAtraccion : listAtracciones) {
+			for (Atraccion unaAtraccion : ((Promocion) sugerencia).getAtracciones()) {
 				if (this.sugerenciasAceptadas.contains((Sugerible) unaAtraccion)) {
 					incluye = true;
 					break;
 				} else {
-					for (Sugerible unaSugerenciaAceptada : this.sugerenciasAceptadas) {
-						if (unaSugerenciaAceptada instanceof Promocion
-								&& ((Promocion) unaSugerenciaAceptada).incluyeAtraccion(unaAtraccion)) {
+					for (Promocion unaPromocionAceptada : this.getPromociones()) {
+						if (unaPromocionAceptada.getAtracciones().contains(unaAtraccion)){
 							incluye = true;
 							break;
 						}
@@ -68,36 +70,9 @@ public class Itinerario {
 
 	public String resumen() {
 		String compras = "";
-		for (int i = 0; i < this.sugerenciasAceptadas.size(); i++) {
-			if (this.sugerenciasAceptadas.get(i) instanceof Promocion) {
-				compras += "	" + this.sugerenciasAceptadas.get(i).getNombre() + "[" + nuevaLinea;
-				Promocion unaPromocion = (Promocion) this.sugerenciasAceptadas.get(i);
-				for (int j = 0; j < unaPromocion.atracciones.size(); j++) {
-					compras += "		" + unaPromocion.atracciones.get(j).getNombre() + ": cuesta "
-							+ unaPromocion.atracciones.get(j).costoTotal() + " monedas y tiene un tiempo de "
-							+ unaPromocion.atracciones.get(j).tiempoTotal() + " horas." + nuevaLinea;
-				}
-				if (this.sugerenciasAceptadas.get(i) instanceof PromocionAxB) {
-					compras += "		"
-							+ ((PromocionAxB) this.sugerenciasAceptadas.get(i)).getAtraccionGratis().getNombre()
-							+ ": es gratis y tiene un tiempo de "
-							+ ((PromocionAxB) this.sugerenciasAceptadas.get(i)).getAtraccionGratis().tiempoTotal()
-							+ " horas." + nuevaLinea;
-				}
-				compras += "	]: el pack cuesta " + this.sugerenciasAceptadas.get(i).costoTotal()
-						+ " monedas y tiene un tiempo de " + this.sugerenciasAceptadas.get(i).tiempoTotal() + " horas."
-						+ nuevaLinea;
-			} else
-				compras += "	" + this.sugerenciasAceptadas.get(i).getNombre() + ": cuesta "
-						+ this.sugerenciasAceptadas.get(i).costoTotal() + " monedas y tiene un tiempo de "
-						+ this.sugerenciasAceptadas.get(i).tiempoTotal() + " horas." + nuevaLinea;
-		}
-		return "Compras realizadas: " + nuevaLinea + compras + "Total a pagar: " + this.costoTotal() + " monedas"
-				+ nuevaLinea + "Tiempo necesario para la salida: " + this.horasNecesarias() + " horas";
+		for (int i = 0; i < this.sugerenciasAceptadas.size(); i++) 
+			compras += this.sugerenciasAceptadas.get(i).resumen();
+		return "Compras realizadas: " + App.nuevaLinea + compras + App.nuevaLinea + "Total a pagar: " + this.costoTotal() + " monedas"
+				+ App.nuevaLinea + "Tiempo necesario para la salida: " + this.horasNecesarias() + " horas";
 	}
-	
-	public ArrayList<Sugerible> getSugerenciasAceptadas(){
-		return this.sugerenciasAceptadas;
-	}
-	
 }

@@ -52,8 +52,14 @@ public class Atraccion implements Sugerible{
 
 	@Override
 	public String toString() {
-		return "La atraccion " + nombre + ", cuesta " + costo + " monedas, se necesita un tiempo de " + tiempo + 
-				" horas para realizarlo, y el tipo es " + tipo;
+		return "La atraccion " + this.nombre + ": cuesta " + this.costo + " monedas y tiene un tiempo de " + this.tiempo 
+				+ " horas, y el tipo es " + this.tipo;
+	}
+
+	@Override
+	public String resumen() {
+		return  "	" + this.nombre + ": cuesta " + this.costo + " monedas y tiene un tiempo de " + this.tiempo 
+				+ " horas.";
 	}
 
 	@Override
