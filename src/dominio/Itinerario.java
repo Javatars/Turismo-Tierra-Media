@@ -70,9 +70,12 @@ public class Itinerario {
 
 	public String resumen() {
 		String compras = "";
-		for (int i = 0; i < this.sugerenciasAceptadas.size(); i++) 
-			compras += this.sugerenciasAceptadas.get(i).resumen();
-		return "Compras realizadas: " + App.nuevaLinea + compras + App.nuevaLinea + "Total a pagar: " + this.costoTotal() + " monedas"
+		for (int i = 0; i < this.sugerenciasAceptadas.size(); i++) {
+			if(this.sugerenciasAceptadas.get(i) instanceof Atraccion)
+				compras += this.sugerenciasAceptadas.get(i).resumen() + App.nuevaLinea;
+			else compras += this.sugerenciasAceptadas.get(i).resumen();
+		}	
+		return "Compras realizadas: " + App.nuevaLinea + compras + "Total a pagar: " + this.costoTotal() + " monedas"
 				+ App.nuevaLinea + "Tiempo necesario para la salida: " + this.horasNecesarias() + " horas";
 	}
 }
