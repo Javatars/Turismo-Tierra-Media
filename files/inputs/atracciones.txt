@@ -1,0 +1,13 @@
+Moria-10-2-6-AVENTURA
+Minas Tirith-5-2.5-25-PAISAJE
+La Comarca-3-6.5-150-DEGUSTACION
+Mordor-25-3-4-AVENTURA
+Abismo de Helm-5-2-15-PAISAJE
+Lothlorien-35-1-30-DEGUSTACION
+Erebor-12-3-32-PAISAJE
+Bosque Negro-3-4-12-AVENTURA
+Rivendel-14-4.5-3-DEGUSTACION
+Isengard-17-5.6-2-AVENTURA
+Edoras-9-4.2-5-PAISAJE
+Llanuras de Rohan-7-6.3-8-PAISAJE
+Bosque de Fangorn-18-4.7-11-AVENTURA

@@ -20,7 +20,7 @@ import excepciones.UsuarioExistenteException;
 
 public class AdministradorArchivo {
 	public static ArrayList<Usuario> leerUsuarios() throws UsuarioExistenteException, FileNotFoundException {
-		File f = new File("files/usuarios.in");
+		File f = new File("files/inputs/usuarios.txt");
 		Scanner sc = null;
 		ArrayList<Usuario> usuarios = App.getUsuarios();
 		String[] line;
@@ -48,7 +48,7 @@ public class AdministradorArchivo {
 	}
 
 	public static ArrayList<Sugerible> leerAtracciones() throws AtraccionExistenteException, FileNotFoundException {
-		File f = new File("files/atracciones.in");
+		File f = new File("files/inputs/atracciones.txt");
 		Scanner sc;
 		ArrayList<Sugerible> sugerencias = App.getSugerencias();
 		String[] line;
@@ -76,7 +76,7 @@ public class AdministradorArchivo {
 	}
 
 	public static ArrayList<Sugerible> leerPromociones() throws FileNotFoundException, PromocionExistenteException, AtraccionNoExisteException{
-		File f = new File("files/promociones.in");
+		File f = new File("files/inputs/promociones.txt");
 		Scanner sc;
 		ArrayList<Sugerible> sugerencias = App.getSugerencias();
 		String[] line;
@@ -144,7 +144,7 @@ public class AdministradorArchivo {
 	}
 
 	public static void escribirCompraUsuario(Usuario usuario) {
-		File f = new File("files/" + usuario.getNombre() + ".out");
+		File f = new File("files/outputs/" + usuario.getNombre() + ".txt");
 		PrintWriter pw;
 		
 		try {
