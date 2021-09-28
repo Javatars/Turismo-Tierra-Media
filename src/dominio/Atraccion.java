@@ -51,6 +51,11 @@ public class Atraccion implements Sugerible{
 	}
 
 	@Override
+	public boolean esOcontiene(Sugerible sugerencia) {
+		return this.equals(sugerencia);
+	}
+
+	@Override
 	public String toString() {
 		return "La atraccion " + this.nombre + ": cuesta " + this.costo + " monedas y tiene un tiempo de " + this.tiempo 
 				+ " horas, y el tipo es " + this.tipo;

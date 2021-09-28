@@ -70,6 +70,18 @@ public abstract class Promocion implements Sugerible {
 	}
 
 	@Override
+	public boolean esOcontiene(Sugerible sugerencia) {
+		boolean incluye = false;
+		for(Atraccion unaAtraccion : this.atracciones) {
+			if(unaAtraccion.esOcontiene(sugerencia) || sugerencia.esOcontiene(unaAtraccion)) {
+				incluye = true;
+				break;
+			}
+		}
+		return incluye;
+	}
+
+	@Override
 	public String resumen() {
 		String resumen = "";
 		resumen += "	" + this.nombre + "[" + App.nuevaLinea;

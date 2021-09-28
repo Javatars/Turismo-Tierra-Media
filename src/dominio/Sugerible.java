@@ -10,4 +10,5 @@ public interface Sugerible {
 	public String getNombre();
 	public String toString();
 	public String resumen();
+	public boolean esOcontiene(Sugerible sugerencia);
 }

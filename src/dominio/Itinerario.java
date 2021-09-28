@@ -43,26 +43,10 @@ public class Itinerario {
 
 	public boolean incluyeAtraccion(Sugerible sugerencia) {
 		boolean incluye = false;
-		if (!sugerencia.esPromocion()) {
-			for (Promocion unaPromocionAceptada : this.getPromociones()) {
-				if(unaPromocionAceptada.getAtracciones().contains((Atraccion) sugerencia)) {
-					incluye = true;
-					break;
-				}
-			}
-		} else {
-			for (Atraccion unaAtraccion : ((Promocion) sugerencia).getAtracciones()) {
-				if (this.sugerenciasAceptadas.contains((Sugerible) unaAtraccion)) {
-					incluye = true;
-					break;
-				} else {
-					for (Promocion unaPromocionAceptada : this.getPromociones()) {
-						if (unaPromocionAceptada.getAtracciones().contains(unaAtraccion)){
-							incluye = true;
-							break;
-						}
-					}
-				}
+		for(Sugerible unaSugerenciaAceptada : this.sugerenciasAceptadas) {
+			if(unaSugerenciaAceptada.esOcontiene(sugerencia) || sugerencia.esOcontiene(unaSugerenciaAceptada)) {
+				incluye = true;
+				break;
 			}
 		}
 		return incluye;
