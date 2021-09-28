@@ -37,10 +37,6 @@ public class Usuario {
 		this.tiempoDisponible -= tiempo;
 	}
 
-	public Itinerario getItinerario() {
-		return this.itinerario;
-	}
-
 	public int getPresupuesto() {
 		return presupuesto;
 	}
@@ -50,9 +46,14 @@ public class Usuario {
 	}
 
 	public void comprar(Sugerible sugerencia) {
-		this.getItinerario().agregarSugerencia(sugerencia);
+		this.itinerario.agregarSugerencia(sugerencia);
 		this.disminuirPresupuesto(sugerencia.costoTotal());
 		this.disminuirTiempoDisponible(sugerencia.tiempoTotal());
 		sugerencia.disminuirCupo();
+	}
+
+	@Override
+	public String toString() {
+		return this.itinerario.resumen();
 	}
 }

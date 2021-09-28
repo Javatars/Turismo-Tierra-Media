@@ -12,10 +12,6 @@ public class PromocionAxB extends Promocion {
 		this.atraccionGratis = atraccion;
 		this.atracciones.add(atraccion);
 	}
-	
-	public Atraccion getAtraccionGratis() {
-		return this.atraccionGratis;
-	}
 
 	@Override
 	public int costoTotal() {
@@ -40,8 +36,8 @@ public class PromocionAxB extends Promocion {
 		resumen += "	" +  this.nombre + "[" + App.nuevaLinea;
 		for (int j = 0; j < this.atracciones.size() - 1; j++)
 			resumen += "	" + this.atracciones.get(j).resumen() + App.nuevaLinea;
-		resumen += "		" + this.getAtraccionGratis().getNombre() + ": es gratis y tiene un tiempo de "
-				+ this.getAtraccionGratis().tiempoTotal() + " horas." + App.nuevaLinea;
+		resumen += "		" + this.atraccionGratis.getNombre() + ": es gratis y tiene un tiempo de "
+				+ this.atraccionGratis.tiempoTotal() + " horas." + App.nuevaLinea;
 		resumen += "	]: el pack cuesta " + this.costoTotal() + " monedas y tiene un tiempo de " 
 				+ this.tiempoTotal() + " horas." + App.nuevaLinea;
 		return resumen;

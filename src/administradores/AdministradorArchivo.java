@@ -150,7 +150,7 @@ public class AdministradorArchivo {
 		try {
 			pw = new PrintWriter(f);
 			 
-			pw.write(usuario.getItinerario().resumen());
+			pw.write(usuario.toString());
 			
 			pw.close();
 		} catch (FileNotFoundException e) {

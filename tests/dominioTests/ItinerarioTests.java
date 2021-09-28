@@ -70,16 +70,6 @@ public class ItinerarioTests {
 	}
 
 	@Test
-	public void agregarSugerencias() {
-		itinerario1.agregarSugerencia(atraccion1);
-		itinerario1.agregarSugerencia(atraccion2);
-		itinerario1.agregarSugerencia(atraccion3);
-		itinerario1.agregarSugerencia(promocion1);
-
-		assertEquals(4, itinerario1.getSugerenciasAceptadas().size());
-	}
-
-	@Test
 	public void costoTotal() {
 		itinerario1.agregarSugerencia(atraccion1);
 		itinerario1.agregarSugerencia(atraccion2);

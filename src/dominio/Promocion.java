@@ -16,10 +16,6 @@ public abstract class Promocion implements Sugerible {
 		this.atracciones = atracciones;
 	}
 
-	public ArrayList<Atraccion> getAtracciones(){
-		return this.atracciones;
-	}
-
 	@Override
 	public String getNombre() {
 		return this.nombre;

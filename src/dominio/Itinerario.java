@@ -11,10 +11,6 @@ public class Itinerario {
 		this.sugerenciasAceptadas = new ArrayList<Sugerible>();
 	}
 
-	public ArrayList<Sugerible> getSugerenciasAceptadas(){
-		return this.sugerenciasAceptadas;
-	}
-
 	public double horasNecesarias() {
 		double tiempo = 0;
 		for (Sugerible unaSugerencia : this.sugerenciasAceptadas)
@@ -31,14 +27,6 @@ public class Itinerario {
 
 	public void agregarSugerencia(Sugerible sugerencia) {
 		this.sugerenciasAceptadas.add(sugerencia);
-	}
-	
-	public ArrayList<Promocion> getPromociones(){
-		ArrayList<Promocion> promociones = new ArrayList<Promocion>();
-		for(Sugerible unaSugerenciaAceptada : this.sugerenciasAceptadas) {
-			if(unaSugerenciaAceptada.esPromocion()) promociones.add((Promocion)unaSugerenciaAceptada);
-		}
-		return promociones;
 	}
 
 	public boolean incluyeAtraccion(Sugerible sugerencia) {
