@@ -1,7 +1,7 @@
 package dominio;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-
 import app.App;
 
 public abstract class Promocion implements Sugerible {
@@ -80,11 +80,13 @@ public abstract class Promocion implements Sugerible {
 	@Override
 	public String resumen() {
 		String resumen = "";
+		DecimalFormat formato = new DecimalFormat();
+		formato.setMaximumFractionDigits(2);
 		resumen += "	" + this.nombre + "[" + App.nuevaLinea;
 		for (int j = 0; j < this.atracciones.size(); j++)
 			resumen += "	" + this.atracciones.get(j).resumen() + App.nuevaLinea;
 		resumen += "	]: el pack cuesta " + this.costoTotal() + " monedas y tiene un tiempo de " 
-				+ this.tiempoTotal() + " horas." + App.nuevaLinea;
+				+ formato.format(this.tiempoTotal()) + " horas." + App.nuevaLinea;
 		return resumen;
 	}
 }

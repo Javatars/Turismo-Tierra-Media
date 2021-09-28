@@ -1,5 +1,6 @@
 package dominio;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import app.App;
@@ -41,6 +42,8 @@ public class Itinerario {
 	}
 
 	public String resumen() {
+		DecimalFormat formato = new DecimalFormat();
+		formato.setMaximumFractionDigits(2);
 		String compras = "";
 		for (int i = 0; i < this.sugerenciasAceptadas.size(); i++) {
 			if(this.sugerenciasAceptadas.get(i) instanceof Atraccion)
@@ -48,6 +51,6 @@ public class Itinerario {
 			else compras += this.sugerenciasAceptadas.get(i).resumen();
 		}	
 		return "Compras realizadas: " + App.nuevaLinea + compras + "Total a pagar: " + this.costoTotal() + " monedas"
-				+ App.nuevaLinea + "Tiempo necesario para la salida: " + this.horasNecesarias() + " horas";
+				+ App.nuevaLinea + "Tiempo necesario para la salida: " + formato.format(this.horasNecesarias()) + " horas";
 	}
 }
