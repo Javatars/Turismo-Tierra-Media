@@ -71,15 +71,26 @@ public class App {
 	public static void sugerir(Sugerible sugerencia, Usuario unUsuario) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println(sugerencia.toString());
-		System.out.println("¿Desea comprarlo?(si/no): ");
+		System.out.print("¿Desea comprarlo?(si/no): ");
 		String decisionUsuario = "";
 		try {
 			decisionUsuario = reader.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if(decisionUsuario.equals("si")) {
+		if(decisionUsuario.equals("si"))
 			unUsuario.comprar(sugerencia);
+		else if(!decisionUsuario.equals("si") && !decisionUsuario.equals("no")) {
+			while(!decisionUsuario.equals("si") && !decisionUsuario.equals("no")) {
+				System.out.print("Debe ingresar si o no: ");
+				try {
+					decisionUsuario = reader.readLine();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if(decisionUsuario.equals("si"))
+				unUsuario.comprar(sugerencia);
 		}
 	}
 
