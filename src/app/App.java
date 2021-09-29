@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import administradores.AdministradorArchivo;
+import dominio.Atraccion;
 import dominio.ComparadorDeSugerencias;
 import dominio.Sugerible;
 import dominio.Usuario;
@@ -77,6 +78,35 @@ public class App {
 		if(decisionUsuario.equals("si")) {
 			unUsuario.comprar(sugerencia);
 		}
+	}
+
+	public static boolean existeUsuario(String nombreUsuario) {
+		boolean existeUsuario = false;
+		for(Usuario unUsuario : usuarios) {
+			if(unUsuario.getNombre().equals(nombreUsuario)) {
+				existeUsuario = true;
+				break;
+			}	
+		}
+		return existeUsuario;
+	}
+
+	public static boolean existeSugerencia(String nombreSugerencia) {
+		boolean existeSugerencia = false;
+		for(Sugerible unaSugerencia : sugerencias) {
+			if(unaSugerencia.getNombre().equals(nombreSugerencia)) {
+				existeSugerencia = true;
+				break;
+			}
+		}
+		return existeSugerencia;
+	}
+
+	public static Atraccion getAtraccionPorNombre(String nombreSugerencia) {
+		for(Sugerible unaSugerencia : sugerencias) {
+			if(unaSugerencia.getNombre().equals(nombreSugerencia)) return (Atraccion) unaSugerencia;	
+		}
+		return null;//devuelve null si no existe la atraccion
 	}
 
 	public static ArrayList<Usuario> getUsuarios() {

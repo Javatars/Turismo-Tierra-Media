@@ -27,15 +27,7 @@ public class AdministradorArchivo {
 		sc = new Scanner(f);
 		while(sc.hasNextLine()) {
 			line = sc.nextLine().split("-");
-
-			boolean existeUsuario = false;
-			for(Usuario unUsuario : usuarios) {
-				if(line[0].equals(unUsuario.getNombre())) {
-					existeUsuario = true;
-					break;
-				}	
-			}
-			if(!existeUsuario)
+			if(!App.existeUsuario(line[0]))
 				usuarios.add(new Usuario(line[0], Integer.parseInt(line[1]), Double.parseDouble(line[2]),TipoAtraccion.valueOf(line[3])));
 			else {
 				sc.close();
@@ -55,15 +47,7 @@ public class AdministradorArchivo {
 		sc = new Scanner(f);
 		while(sc.hasNextLine()) {
 			line = sc.nextLine().split("-");
-
-			boolean existeAtraccion = false;
-			for(Sugerible unaSugerencia : sugerencias) {
-				if(line[0].equals(unaSugerencia.getNombre())) {
-					existeAtraccion = true;
-					break;
-				}	
-			}
-			if(!existeAtraccion)
+			if(!App.existeSugerencia(line[0]))
 				sugerencias.add(new Atraccion(line[0], Integer.parseInt(line[1]), Double.parseDouble(line[2]),Integer.parseInt(line[3]), TipoAtraccion.valueOf(line[4])));
 			else {
 				sc.close();
@@ -80,55 +64,28 @@ public class AdministradorArchivo {
 		Scanner sc;
 		ArrayList<Sugerible> sugerencias = App.getSugerencias();
 		String[] line;
-		
 		sc = new Scanner(f);
 		while(sc.hasNextLine()) {
 			line = sc.nextLine().split("-");
-			
-			boolean existePromocion = false;
-			for(Sugerible unaSugerencia : sugerencias) {
-				if(line[1].equals(unaSugerencia.getNombre())) {
-					existePromocion = true;
-					break;
-				}	
-			}
-			if(existePromocion) {
+			if(App.existeSugerencia(line[1])) {
 				sc.close();
 				throw new PromocionExistenteException("Ya existe una Promocion con el nombre " + line[1] + ", corrija el archivo promociones.in e intente nuevamente");
-			}
-			else {
+			}else {
 				ArrayList<Atraccion> listAtracciones = new ArrayList<Atraccion>();
 				for(int i=0; i < Integer.parseInt(line[4]);i++) {
-					boolean existeAtraccion = false;
-					for(Sugerible unaSugerencia : sugerencias) {
-						if(unaSugerencia.getNombre().equals(line[5+i])) {
-							existeAtraccion = true;
-							listAtracciones.add((Atraccion) unaSugerencia);
-							break;
-						}
-					}
-					if(!existeAtraccion) {
+					Atraccion atraccion = App.getAtraccionPorNombre(line[5+i]);
+					if(atraccion == null) {
 						sc.close();
 						throw new AtraccionNoExisteException("No existe una Atraccion con el nombre " + line[5+i] + ", revea los archivos atracciones.in y promociones.in, corrijalos e intente nuevamente");
-					}
+					}else listAtracciones.add(atraccion);
 				}
 				if(Integer.parseInt(line[0]) == 1) {//PROMOCION PORCENTUAL
 					sugerencias.add(new PromocionPorcentual(line[1],TipoAtraccion.valueOf(line[2]),listAtracciones,Double.parseDouble(line[3])));
-				}
-				else if(Integer.parseInt(line[0]) == 2) {//PROMOCION ABSOLUTA
+				}else if(Integer.parseInt(line[0]) == 2) {//PROMOCION ABSOLUTA
 					sugerencias.add(new PromocionAbsoluta(line[1],TipoAtraccion.valueOf(line[2]),listAtracciones,Integer.parseInt(line[3])));
-				}
-				else { //PROMOCION AxB
-					Atraccion atraccionGratis = null;
-					boolean existeAtraccion = false;
-					for(Sugerible unaSugerencia : sugerencias) {
-						if(unaSugerencia.getNombre().equals(line[3])) {
-							existeAtraccion = true;
-							atraccionGratis = (Atraccion) unaSugerencia;
-							break;
-						}
-					}
-					if(existeAtraccion)
+				}else { //PROMOCION AxB
+					Atraccion atraccionGratis = App.getAtraccionPorNombre(line[3]);
+					if(atraccionGratis != null)
 						sugerencias.add(new PromocionAxB(line[1],TipoAtraccion.valueOf(line[2]),listAtracciones,atraccionGratis));
 					else {
 						sc.close();
