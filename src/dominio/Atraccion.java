@@ -1,5 +1,7 @@
 package dominio;
 
+import java.text.DecimalFormat;
+
 public class Atraccion implements Sugerible{
 	private String nombre;
 	private int costo;
@@ -57,14 +59,18 @@ public class Atraccion implements Sugerible{
 
 	@Override
 	public String toString() {
-		return "La atraccion " + this.nombre + ": cuesta " + this.costo + " monedas y tiene un tiempo de " + this.tiempo 
-				+ " horas, y el tipo es " + this.tipo;
+		DecimalFormat formato = new DecimalFormat();
+		formato.setMaximumFractionDigits(2);
+		return "La atraccion " + this.nombre + ": cuesta " + this.costo + " monedas y tiene un tiempo de " 
+				+ formato.format(this.tiempo) + " horas, y el tipo es " + this.tipo;
 	}
 
 	@Override
 	public String resumen() {
-		return  "	" + this.nombre + ": cuesta " + this.costo + " monedas y tiene un tiempo de " + this.tiempo 
-				+ " horas.";
+		DecimalFormat formato = new DecimalFormat();
+		formato.setMaximumFractionDigits(2);
+		return  "	" + this.nombre + ": cuesta " + this.costo + " monedas y tiene un tiempo de " 
+				+ formato.format(this.tiempo) + " horas.";
 	}
 
 	@Override

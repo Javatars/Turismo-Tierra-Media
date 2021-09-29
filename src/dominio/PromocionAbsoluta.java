@@ -25,7 +25,7 @@ public class PromocionAbsoluta extends Promocion {
 			if(i + 1 == atracciones.size()) nombresAtracciones += atracciones.get(i).getNombre();
 			else nombresAtracciones += atracciones.get(i).getNombre() + ",";
 		}
-		return "La promocion " + this.nombre + ", es " + this.tipoAtraccion + ", cuesta " + this.costoTotal() + " monedas, se necesita un tiempo de " + formato.format(this.tiempoTotal()) 
-				+ " horas para realizarlo, e incluye las siguientes atracciones: " + nombresAtracciones;
+		return "La promocion " + this.nombre + ", es " + this.tipoAtraccion + ", cuesta " + this.costoTotal() + " monedas, se necesita un tiempo de " 
+				+ formato.format(this.tiempoTotal()) + " horas para realizarlo, e incluye las siguientes atracciones: " + nombresAtracciones;
 	}
 }

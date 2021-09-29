@@ -28,8 +28,8 @@ public class PromocionAxB extends Promocion {
 			if(i + 1 == atracciones.size() - 1) nombresAtracciones += atracciones.get(i).getNombre();
 			else nombresAtracciones += atracciones.get(i).getNombre() + ",";
 		}
-		return "La promocion " + this.nombre + ", es " + this.tipoAtraccion + ", cuesta " + formato.format(this.costoTotal()) + " monedas, se necesita un tiempo de " + this.tiempoTotal() 
-				+ " horas para realizarlo, incluye las siguientes atracciones " + nombresAtracciones
+		return "La promocion " + this.nombre + ", es " + this.tipoAtraccion + ", cuesta " + this.costoTotal() + " monedas, se necesita un tiempo de " 
+				+ formato.format(this.tiempoTotal()) + " horas para realizarlo, incluye las siguientes atracciones " + nombresAtracciones
 				+ " y tiene la atraccion "+ this.atraccionGratis.getNombre() + " gratis";
 	}
 	
@@ -42,7 +42,7 @@ public class PromocionAxB extends Promocion {
 		for (int j = 0; j < this.atracciones.size() - 1; j++)
 			resumen += "	" + this.atracciones.get(j).resumen() + App.nuevaLinea;
 		resumen += "		" + this.atraccionGratis.getNombre() + ": es gratis y tiene un tiempo de "
-				+ this.atraccionGratis.tiempoTotal() + " horas." + App.nuevaLinea;
+				+ formato.format(this.atraccionGratis.tiempoTotal()) + " horas." + App.nuevaLinea;
 		resumen += "	]: el pack cuesta " + this.costoTotal() + " monedas y tiene un tiempo de " 
 				+ formato.format(this.tiempoTotal()) + " horas." + App.nuevaLinea;
 		return resumen;

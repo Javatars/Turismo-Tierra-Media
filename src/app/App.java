@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import administradores.AdministradorArchivo;
 import dominio.Atraccion;
@@ -44,14 +45,16 @@ public class App {
 	}
 
 	public static void ejecutar() {
+		DecimalFormat formato = new DecimalFormat();
+		formato.setMaximumFractionDigits(2);
 		for(Usuario unUsuario : usuarios) {
 			sugerencias.sort(new ComparadorDeSugerencias(unUsuario.getTipoAtraccionPreferida()));
 			System.out.println("-----------------------");
 			System.out.println("Usuario " + unUsuario.getNombre() + " - tiene " + unUsuario.getPresupuesto() + " monedas y " + 
-					unUsuario.getTiempoDisponible() + " horas disponibles.");
+					formato.format(unUsuario.getTiempoDisponible()) + " horas disponibles.");
 			for(Sugerible unaSugerencia : sugerencias) {
 				if(unUsuario.puedeComprar(unaSugerencia)) {
-					System.out.println("Le quedan " + unUsuario.getPresupuesto() + " monedas y " + unUsuario.getTiempoDisponible() + " horas disponibles.");
+					System.out.println("Le quedan " + unUsuario.getPresupuesto() + " monedas y " + formato.format(unUsuario.getTiempoDisponible()) + " horas disponibles.");
 					sugerir(unaSugerencia, unUsuario);
 				}		
 			}

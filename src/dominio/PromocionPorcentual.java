@@ -29,6 +29,4 @@ public class PromocionPorcentual extends Promocion {
 				+ "%, es " + this.tipoAtraccion + ", cuesta " + this.costoTotal() + " monedas, se necesita un tiempo de " + formato.format(this.tiempoTotal()) 
 				+ " horas para realizarlo, e incluye las siguientes atracciones: " + nombresAtracciones;
 	}
-	
-	
 }
