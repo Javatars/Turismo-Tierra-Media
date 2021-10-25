@@ -20,9 +20,6 @@ public class App {
 	private static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	private static ArrayList<Sugerible> sugerencias = new ArrayList<Sugerible>();
 
-	// Se usa en el metodo resumen() para que devuelva el string con un salto de linea
-	public static String nuevaLinea = System.getProperty("line.separator");
-
 	public static void main(String[] args) {
 		System.out.println("Sistema de Turismo en la Tierra Media");
 

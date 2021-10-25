@@ -3,8 +3,6 @@ package dominio;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import app.App;
-
 public class PromocionAxB extends Promocion {
 	private Atraccion atraccionGratis;
 
@@ -38,13 +36,13 @@ public class PromocionAxB extends Promocion {
 		DecimalFormat formato = new DecimalFormat();
 		formato.setMaximumFractionDigits(2);
 		String resumen = "";
-		resumen += "	" +  this.nombre + "[" + App.nuevaLinea;
+		resumen += "	" +  this.nombre + "[" + "\n";
 		for (int j = 0; j < this.atracciones.size() - 1; j++)
-			resumen += "	" + this.atracciones.get(j).resumen() + App.nuevaLinea;
+			resumen += "	" + this.atracciones.get(j).resumen() + "\n";
 		resumen += "		" + this.atraccionGratis.getNombre() + ": es gratis y tiene un tiempo de "
-				+ formato.format(this.atraccionGratis.tiempoTotal()) + " horas." + App.nuevaLinea;
+				+ formato.format(this.atraccionGratis.tiempoTotal()) + " horas." + "\n";
 		resumen += "	]: el pack cuesta " + this.costoTotal() + " monedas y tiene un tiempo de " 
-				+ formato.format(this.tiempoTotal()) + " horas." + App.nuevaLinea;
+				+ formato.format(this.tiempoTotal()) + " horas." + "\n";
 		return resumen;
 	}
 }

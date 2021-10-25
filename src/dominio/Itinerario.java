@@ -3,8 +3,6 @@ package dominio;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import app.App;
-
 public class Itinerario {
 	private ArrayList<Sugerible> sugerenciasAceptadas;	
 
@@ -47,10 +45,10 @@ public class Itinerario {
 		String compras = "";
 		for (int i = 0; i < this.sugerenciasAceptadas.size(); i++) {
 			if(this.sugerenciasAceptadas.get(i) instanceof Atraccion)
-				compras += this.sugerenciasAceptadas.get(i).resumen() + App.nuevaLinea;
+				compras += this.sugerenciasAceptadas.get(i).resumen() + "\n";
 			else compras += this.sugerenciasAceptadas.get(i).resumen();
 		}	
-		return "Compras realizadas: " + App.nuevaLinea + compras + "Total a pagar: " + this.costoTotal() + " monedas"
-				+ App.nuevaLinea + "Tiempo necesario para la salida: " + formato.format(this.horasNecesarias()) + " horas";
+		return "Compras realizadas: " + "\n" + compras + "Total a pagar: " + this.costoTotal() + " monedas"
+				+ "\n" + "Tiempo necesario para la salida: " + formato.format(this.horasNecesarias()) + " horas";
 	}
 }
